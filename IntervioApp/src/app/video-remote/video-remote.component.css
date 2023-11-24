@@ -1,0 +1,28 @@
+:host {
+    background-color: #252327;
+    background-image: url("/assets/user.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.video-overlay-data {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+}
+
+
+.icons-data {
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    align-items: center;
+    margin-left: 2%;
+    margin-top: 2%;
+}

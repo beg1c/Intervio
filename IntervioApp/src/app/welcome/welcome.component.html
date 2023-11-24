@@ -1,0 +1,123 @@
+<div class="background">
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="col-0 col-md-1"></div>
+      <div class="col">
+        <a class="navbar-brand logo" href="#">
+          <img src="/assets/logo.png" alt="Logo" height="45">
+        </a>
+      </div>
+      <div class="col-0">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link about" href="#">ABOUT</a>
+          </li>
+        </ul>
+      </div>
+      <div class="col-0 col-md-2"></div>
+    </div>
+  </nav>
+  <div class="d-flex height align-items-center justify-content-center">
+    <div class="container-fluid">
+      <div class="row order-rows align-items-center">
+        <div class="col-0 col-md-1"></div>
+        <div class="col-12 col-md-4">
+          <h2 class="d-none d-md-block">Crack the interview.</h2>
+          <h1 class="d-none d-md-block">Intervio</h1>
+          <p class="d-none d-md-block">Online interview application with code execution support for all major programming languages.</p>
+          <div class="form-group">
+              <div [formGroup]="roomForm" class="form-group input-group">
+                  <input (keyup)="addDashToInput()" (keyup.backspace)="removeDash()" type="text" formControlName="roomName" id="roomName"class="form-control input-join" placeholder="Enter interview ID" spellcheck="false" aria-label="Interview ID" aria-describedby="Room ID" maxlength="11" required>
+                  <button type="button" class="btn btn-join" (click)="onSubmitJoin()" type="submit">JOIN INTERVIEW</button>
+              </div>
+          </div>
+          <div [class.invisible]="!(roomName.invalid && submitAttemptJoin)" class="d-flex justify-content-start align-items-center text-danger mb-3">
+              <span *ngIf="!roomName.errors?.['min-length'] && submitAttemptJoin" class="mt-1 ms-2 me-2" style="color: #da0037;">• Room name must be 11 characters long.</span>
+              <span *ngIf="roomName.errors?.['pattern'] && submitAttemptJoin" class="mt-1 ms-2 me-2" style="color: #da0037;">• Only letters, numbers and '-' are allowed.</span>
+              <span class="invisible">.</span>
+          </div>
+          <div>
+              <div class="d-flex align-items-center">
+                <p class="d-none d-lg-block" style="font-weight:10; margin-right: 3%;">or</p>
+                <button type="button" class="btn btn-create" (click)="openModal(create)">CREATE NEW</button>
+              </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
+          <img class="illustration-photo" src="/assets/illustration.svg" alt="Online interview" width="90%" height="90%">
+        </div>
+        <div class="col-12 col-md-0 d-md-none">  
+          <h1 class="d-md-none text-center">Intervio</h1>
+          <h2 class="d-md-none text-center">Crack the interview.</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #create>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Enter your name</h5>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+    <h6 class="mb-3" style="font-weight: 100;">Enter display name for this interview session. Your name won't be stored anywhere and will only be used for your identification during this interview session.</h6>
+    <div class="form-group w-100">
+      <div [formGroup]="userForm" class="form-group input-group">
+        <input type="text" formControlName="name" id="name"class="form-control name-prompt" autocomplete="off" placeholder="Name" spellcheck="false" aria-label="Name" aria-describedby="Name" maxlength="20" required>
+      </div>
+    </div>
+    <div [class.invisible]="!(name.invalid && submitAttemptNameCreate)" class="d-flex justify-content-start align-items-center text-danger mb-3">
+      <span *ngIf="name.errors?.['required'] && submitAttemptNameCreate" class="ms-2 me-2" style="color: #da0037; font-weight: 500;">• Name is required to create the interview.</span>
+    </div>
+    <button type="button" class="btn btn-create-2" (click)="onSubmitNameCreate()">CREATE INTERVIEW</button>
+  </div>
+</ng-template>
+
+<ng-template #join>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Enter your name</h5>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex flex-column justify-content-center align-items-center">
+    <div class="mb-3">Enter display name for this interview session. Your name won't be stored anywhere and will only be used for your identification during this interview session.</div>
+    <div class="form-group w-100">
+      <div [formGroup]="userForm" class="form-group input-group">
+        <input type="text" formControlName="name" id="name"class="form-control name-prompt" autocomplete="off" placeholder="Name" spellcheck="false" aria-label="Name" aria-describedby="Name" maxlength="20" required>
+      </div>
+    </div>
+    <div [class.invisible]="!(name.invalid && submitAttemptNameJoin)" class="d-flex justify-content-start align-items-center text-danger mb-3">
+      <span *ngIf="name.errors?.['required'] && submitAttemptNameJoin" class="mt-2 ms-2 me-2" style="color: #da0037; font-weight: 500;">• Name is required to join the interview.</span>
+    </div>
+    <button type="button" class="btn btn-create-2" (click)="onSubmitNameJoin()">JOIN INTERVIEW</button>
+  </div>
+</ng-template>
+
+<ngx-spinner name="connect-spinner" bdColor="rgba(0,0,0,0.8)" size="large" color="#ededed" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> Connecting to server... </p>
+  <div class="d-flex justify-content-center" style="position: absolute; width: 100%;">
+      <button class="btn btn-cancel" (click)="stopConnecting()">Cancel</button>
+  </div>
+</ngx-spinner>
+<ngx-spinner name="creating-spinner" bdColor="rgba(0,0,0,0.8)" size="large" color="#ededed" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white"> Creating room... </p>
+    <div class="d-flex justify-content-center" style="position: absolute; width: 100%;">
+        <button class="btn btn-cancel" (click)="stopConnecting()">Cancel</button>
+    </div>
+</ngx-spinner>
+<ngx-spinner name="joining-spinner" bdColor="rgba(0,0,0,0.8)" size="large" color="#ededed" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white"> Joining room {{roomName.value}}... </p>
+  <div class="d-flex justify-content-center" style="position: absolute; width: 100%;">
+      <button class="btn btn-cancel" (click)="stopConnecting()">Cancel</button>
+  </div>
+</ngx-spinner>
+<ngx-spinner name="reconnect-spinner" bdColor="rgba(0,0,0,0.8)" size="large" color="#fff" type="square-jelly-box" [fullScreen]="true">
+  <p style="color: white; font-size: 150%;"> No connection to server. Trying to reconnect... </p>
+  <div class="d-flex justify-content-center" style="position: absolute; width: 100%;">
+      <button class="btn btn-cancel" (click)="stopConnecting()">Cancel</button>
+  </div>
+</ngx-spinner>
