@@ -1,0 +1,11 @@
+.console-textarea {
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+    padding: 2% 4% 4% 4%;
+    border: none;
+    resize: none;
+    outline: none;
+}

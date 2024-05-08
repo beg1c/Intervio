@@ -1,0 +1,122 @@
+<ngx-spinner name="reconnect-spinner" bdColor="rgba(0,0,0,0.8)" size="large" color="#fff" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white; font-size: 150%;"> No connection to server. Trying to reconnect... </p>
+    <div class="d-flex justify-content-center" style="position: absolute; width: 100%;">
+        <button class="btn btn-cancel" (click)="leaveInterview()">Cancel</button>
+    </div>
+</ngx-spinner>
+<div class="background">
+    <nav class="navbar navheight">
+        <div class="d-flex align-items-center">
+            <img class="logo" src="/assets/logo.png" alt="Logo" height="36">
+            <h1 class="logo-heading d-none d-md-block">Intervio</h1>
+        </div>
+        <div class="d-flex align-items-center">
+            <div class="btn-group" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn btn-language btn-language dropdown-toggle"
+                        aria-controls="dropdown-basic">
+                    <img [src]="languageLink" [alt]="languageName" height="24"> <span class="d-none d-md-inline-block">{{languageName}}</span><span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+                    role="menu" aria-labelledby="button-basic">
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(50)"><img src="/assets/language-icons/c.svg" alt="C" height="24"> C</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(54)"><img src="/assets/language-icons/cplusplus.svg" alt="C++" height="24"> C++</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(51)"><img src="/assets/language-icons/csharp.svg" alt="C#" height="24"> C#</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(62)"><img src="/assets/language-icons/java.svg" alt="Java" height="24"> Java</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(63)"><img src="/assets/language-icons/javascript.svg" alt="JavaScript" height="24"> JavaScript</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(78)"><img src="/assets/language-icons/kotlin.svg" alt="Kotlin" height="24"> Kotlin</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(85)"><img src="/assets/language-icons/perl.svg" alt="Perl" height="24"> Perl</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(68)"><img src="/assets/language-icons/php.svg" alt="PHP" height="24"> PHP</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(71)"><img src="/assets/language-icons/python.svg" alt="Python" height="24"> Python</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(72)"><img src="/assets/language-icons/ruby.svg" alt="Ruby" height="24"> Ruby</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(82)"><img src="/assets/language-icons/sql.svg" alt="SQL" height="24"> SQL</a></li>
+                  <li role="menuitem"><a class="dropdown-item" (click)="changeLanguage(74)"><img src="/assets/language-icons/typescript.svg" alt="TypeScript" height="24"> TypeScript</a></li>
+                </ul>
+            </div>
+            <button type="button" class="btn btn-run" (click)="sendRunMessage()">
+                <fa-icon class="me-1" [icon]="faPlay"></fa-icon>
+                Run
+            </button>
+        </div>
+        <div class="d-none d-md-flex align-items-center me-5">
+            <h2 class="room-info">{{time | date: 'HH:mm:ss'}} | {{room?.name}}</h2>
+            <button type="button" class="btn btn-hangup" (click)="openModal(template)">
+                <fa-icon [icon]="faPhone"></fa-icon>
+            </button>
+        </div>
+    </nav>
+
+
+    <div *ngIf="isSmallScreen; else largeScreenLayout" class="container-fullwidth bodyheight">
+      <div class="row h-100">
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="d-flex flex-row justify-content-center">
+            <div [ngClass]="{'second-navbar-item': true, 'active': selectedItem === 'question'}" (click)="selectedItem = 'question'"><span style="margin-left:15px;">Question</span></div>
+            <div [ngClass]="{'second-navbar-item': true, 'active': selectedItem === 'editor'}" (click)="selectedItem = 'editor'"><span style="margin-left:15px;">Editor</span></div>
+            <div [ngClass]="{'second-navbar-item': true, 'active': selectedItem === 'console'}" (click)="selectedItem = 'console'"><span style="margin-left:15px;">Console</span></div>
+          </div>
+          <div *ngIf="selectedItem === 'question'" class="d-flex flex-grow-1">
+              <app-question class="d-flex flex-grow-1 flex-column question-text" [questionInput]="room?.question" (questionInputChange)="questionChangeHandler($event)"></app-question>
+          </div>
+          <div *ngIf="selectedItem === 'editor'" class="d-flex flex-column flex-grow-1">
+              <app-editor class="d-flex flex-grow-1" [editorMode]="editorMode" [editorInput]="room?.editor" (editorInputChange)="editorChangeHandler($event)"></app-editor>
+          </div>
+          <div *ngIf="selectedItem === 'console'" class="d-flex flex-column flex-grow-1">
+              <div class="console-header" style="border-top: none;"><fa-icon class="console-icon" [icon]="faTerminal"></fa-icon></div>
+              <div style="position: relative;" class="d-flex flex-grow-1 console-text">
+                  <ngx-spinner name="console-spinner" bdColor="rgba(0,0,0,0)" size="medium" color="#fff" type="pacman" [fullScreen]="false"></ngx-spinner>
+                  <app-console class="d-flex flex-grow-1 console-text"></app-console>
+              </div>
+          </div>
+          <div class="d-flex d-md-none room-info-sm-div align-items-center justify-content-end">
+            <h2 class="room-info">{{time | date: 'HH:mm:ss'}} | {{room?.name}}</h2>
+            <button type="button" class="btn btn-hangup" (click)="openModal(template)">
+                <fa-icon [icon]="faPhone"></fa-icon>
+            </button>
+          </div>
+          <div class="col-12 d-flex flex-column aspect justify-content-end">
+            <button type="button btn-camera" class="btn btn-camera" (click)="toggleVideo()">{{ showLocal ? 'SHOW REMOTE' : 'SHOW LOCAL' }}</button>
+            <app-video *ngIf="showLocal" class="video1 aspect"></app-video>
+            <app-video-remote *ngIf="!showLocal" class="video2 aspect"></app-video-remote>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #largeScreenLayout>
+      <div class="container-fullwidth bodyheight">
+          <div class="row h-100">
+              <div class="col-4 d-flex flex-column flex-grow-1 h-100 g-0">
+                  <div class="d-flex flex-column">
+                      <div class="question-heading"><span style="margin-left:40px;">Question</span></div>
+                  </div>
+                  <app-question class="d-flex flex-grow-1 flex-column question-text" [questionInput]="room?.question" (questionInputChange)="questionChangeHandler($event)"></app-question>
+                  <!-- <div class="video1 aspect"><img style="object-fit: contain; width: 100%;" src="/assets/video1.jpg"></div> -->
+                  <app-video class="video1 aspect"></app-video>
+              </div>
+              <div class="col-4 d-flex flex-column flex-grow-1 h-100 g-0">
+                  <div class="d-flex">
+                      <button type="button" class="btn-editor-active">Editor</button>
+                      <button type="button" class="btn-editor">Sketch</button>
+                  </div>
+                  <app-editor class="d-flex flex-grow-1 flex-column editor-text" [editorMode]="editorMode" [editorInput]="room?.editor" (editorInputChange)="editorChangeHandler($event)"></app-editor>
+              </div>
+              <div class="col-4 d-flex flex-column flex-grow-1 h-100 g-0">
+                  <div class="console-header"><fa-icon class="console-icon" [icon]="faTerminal"></fa-icon></div>
+                  <div style="position: relative;" class="d-flex flex-grow-1 console-text">
+                      <ngx-spinner name="console-spinner" bdColor="rgba(0,0,0,0)" size="medium" color="#fff" type="pacman" [fullScreen]="false"></ngx-spinner>
+                      <app-console class="d-flex flex-grow-1 console-text"></app-console>
+                  </div>
+                  <app-video-remote class="video2 aspect"></app-video-remote>
+              </div>
+          </div>
+      </div>
+    </ng-template>
+
+    <ng-template #template>
+      <div class="modal-body text-center">
+          <p>Are you sure you want to leave interview?</p>
+          <button type="button" class="btn btn-yes me-1 w-25" (click)="confirm()" (click)="leaveInterview()" >Yes</button>
+          <button type="button" class="btn btn-no ms-1 w-25" (click)="decline()" >No</button>
+      </div>
+      </ng-template>
+</div>

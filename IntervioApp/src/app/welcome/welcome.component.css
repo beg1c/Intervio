@@ -1,0 +1,207 @@
+:host {
+    height: 100%;
+}
+
+.background {
+    background-color: #171717;
+    height: 100%;
+    background-image: url("/assets/background.svg");
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+}
+
+.logo {
+    transition: transform 1.5s ease;
+}
+
+.logo:hover {
+    transform: rotateY(360deg);
+}
+
+.about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    padding: 20px;
+    color:#ededed;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent;
+    border-radius: 3px;
+}
+
+.about:hover {
+    color:#da0037;
+}
+
+
+.height {
+    height: 85vh;
+}
+
+h2 {
+    font-size: 30px;
+    font-family: Arial;
+    font-style: italic;
+}
+
+h1 {
+    font-size: 100px;
+}
+
+p {
+    font-size: 25px;
+}
+
+.input-join {
+    font-weight: 10;
+    font-size: 24px;
+    color: white;
+    background-color: #111114;
+}
+
+input::placeholder {
+    font-size: 18px;
+}
+
+.name-prompt {
+    font-weight: 10;
+    color: white;
+    background-color: #111114;
+    width: 100%;
+}
+
+.name-prompt::placeholder {
+    font-size: 100%;
+}
+
+.btn-join {
+    font-weight: 10;
+    font-size: 100%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    width: 40%;
+    background-color: #444444;
+}
+
+.btn-cancel {
+    font-weight: 10;
+    font-size: 100%;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+    background-color: #da0037;
+}
+
+.btn-join:hover {
+    background-color: #da0037;
+}
+
+.btn-join:disabled {
+    border: none;
+}
+
+.btn-create {
+    font-weight: 10;
+    font-size: 100%;
+    padding: 3% 8%;
+    background-color: #da0037;
+}
+
+.btn-create-2 {
+    font-weight: 10;
+    width: 100%;
+    font-size: 100%;
+    padding: 2% 2%;
+    background-color: #da0037;
+}
+
+.btn-create:hover {
+    background-color: #e1335f;
+}
+
+.btn-create-2:hover {
+    background-color: #e1335f;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+
+@media only screen and (max-width: 768px) {
+    h1 {
+        font-size: 400%;
+    }
+
+    h2 {
+        font-size: 100%;
+        font-weight: 1;
+    }
+
+    .illustration-photo {
+        width: 80%;
+        height: 80%;
+        margin-top: -10%;
+    }
+
+    .height75 {
+        height: auto;
+    }
+
+    .order-rows {
+        flex-direction: column-reverse;
+    }
+
+    .input-join {
+        font-weight: 10;
+        font-size: 100%;
+        color: white;
+        background-color: #111114;
+    }
+
+    input::placeholder {
+        font-size: 100%;
+    }
+
+    .btn-join {
+        font-weight: 10;
+        font-size: 100%;
+        padding-top: 3%;
+        padding-bottom: 3%;
+        width: 40%;
+    }
+
+    .btn-create {
+        width: 100%;
+        font-weight: 10;
+        font-size: 100%;
+        padding: 3% 8%;
+    }
+
+  }
+
+  @media only screen and (max-width: 992px) {
+    h1 {
+        font-size: 500%;
+    }
+
+    h2 {
+        font-size: 150%;
+        font-weight: 1;
+    }
+
+    p {
+        font-size: 100%;
+    }
+
+    .input-join {
+        font-size: 100%;
+    }
+
+    .btn-create {
+        width: 100%;
+    }
+
+  }

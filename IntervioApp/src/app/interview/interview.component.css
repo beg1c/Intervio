@@ -1,0 +1,278 @@
+:host {
+    height: 100%;
+}
+
+.background {
+    background-color: black;
+    height: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.navheight {
+    background-color: #252327;
+    height: 64px;
+    max-width: 100%;
+}
+
+.bodyheight {
+    height: calc(100% - 64px);
+    max-height: calc(100% - 64px);
+}
+
+.aspect {
+    aspect-ratio: 16 / 9;
+}
+
+.grow {
+    display: flex;
+    flex-grow: 1;
+}
+
+.logo {
+    margin-left: 20px;
+    padding: 0;
+}
+
+.logo-heading {
+    font-family: Arial, sans-serif;
+    font-size: 26px;
+    margin: 0;
+    padding: 0;
+    display: table-cell;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.room-info {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 16px;
+}
+
+.btn-hangup {
+    font-size: 24px;
+    color: #DA0037;
+    padding: 0;
+    margin: 0 0 0 20px;
+    transform: rotate(135deg);
+    background: none;
+    border: none;
+
+}
+
+.btn-hangup:hover {
+    color: #e1335f;
+}
+
+.dropdown-item:hover {
+    background-color: #171717;
+    cursor: pointer;
+}
+
+.btn-run {
+    background-color: #DA0037;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    margin: 0 20px 0 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.btn-run:hover {
+    background-color: #e1335f;
+}
+
+.btn-language {
+    background-color: #171717;
+}
+
+.btn-yes {
+    background-color: #444444;
+}
+
+.btn-no {
+    background-color: #DA0037;
+}
+
+.question-heading {
+    display: flex;
+    align-items: center;
+    background-color: #252327;
+    font-family: Arial, sans-serif;
+    height: 40px;
+    font-size: 18px;
+    border-top: 1px solid #141216;
+    border-right: 1px solid #141216;
+    border-bottom: 1px solid #141216;
+}
+
+.second-navbar-item {
+    display: flex;
+    align-items: center;
+    background-color: #252327;
+    font-family: Arial, sans-serif;
+    height: 40px;
+    width: 100%;
+    font-size: 18px;
+    border-top: 1px solid #141216;
+    border-right: 1px solid #141216;
+    border-bottom: 1px solid #141216;
+}
+
+.second-navbar-item.active {
+    border-bottom: none;
+    background-color: #18161a;
+}
+
+.question-text {
+    background-color: #18161a;
+    border-right: 1px solid #141216;
+}
+
+.question-textarea {
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 4% 4% 4% 6%;
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.btn-editor {
+    background-color: #18161a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    height: 40px;
+    width: 50%;
+    border-top: 1px solid #141216;
+    border-left: 1px solid #141216;
+    border-bottom: 1px solid #141216;
+    border-right: none;
+}
+
+.btn-editor-active {
+    background-color: #252327;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    height: 40px;
+    width: 50%;
+    border-top: 1px solid #141216;
+    border-left: none;
+    border-bottom: none;
+    border-right: none;
+}
+
+.btn-cancel {
+    background-color: #da0037;
+    font-weight: 10;
+    font-size: 100%;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.editor-text {
+    background-color: #18161a;
+    max-height: calc(100% - 40px);
+}
+
+.editor-textarea {
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 4%;
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.console-text {
+    background-color: #18161a;
+    border-left: 1px solid #141216;
+}
+
+.console-textarea {
+    background-color: transparent;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    padding: 2% 4% 4% 4%;
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    outline: none;
+}
+
+.console-header {
+    background-color: #18161a;
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    width: 100%;
+    padding-left: 4%;
+    height: 40px;
+    border-top: 1px solid #141216;
+    border-left: 1px solid #141216;
+}
+
+.video1 {
+    position:relative;
+    overflow:hidden;
+    border-top: 1px solid #141216;
+    border-right: 1px solid #141216;
+}
+
+.video2 {
+    position:relative;
+    overflow:hidden;
+    border-top: 1px solid #141216;
+    border-left: 1px solid #141216;
+}
+
+.btn-camera {
+  position: absolute;
+  z-index: 1000;
+  background-color: #DA0037;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.room-info-sm-div {
+  background-color: #18161a;
+}
+
+.CodeMirror {
+    width: 200px;
+}
+
+fa-icon {
+    margin: 0;
+    padding: 0;
+}
+
+@media (max-width: 768px) {
+  .btn-hangup {
+    margin: 0 20px 0 20px;
+  }
+}

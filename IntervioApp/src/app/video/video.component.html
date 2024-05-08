@@ -1,0 +1,97 @@
+<div [class]="activeVideoClass">
+    <div class="icons">
+        <button [hidden]="repeatButtonHidden" class="icon" (click)="connect()"><fa-icon [icon]="faRepeat"></fa-icon></button>
+        <button [disabled]="videoButtonDisabled" class="icon" (click)="startStopVideo()"><fa-icon [icon]="faVideo"></fa-icon></button>
+        <button [disabled]="audioButtonDisabled" class="icon" (click)="startStopAudio()"><fa-icon [icon]="faMicrophone"></fa-icon></button>
+        <button class="icon" (click)="openModal(template)"><fa-icon [icon]="faGear"></fa-icon></button>
+    </div>
+</div>
+<div [class]="noVideoClass">
+    <span>Can't find your {{mediaMessage}}.</span>
+    <span>Check settings to make sure that media is available.</span>
+    <div class="pids-wrapper">
+        <div [className]="volume > 2 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 10 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 20 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 30 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 40 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 50 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 60 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 70 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 90 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 98 ? 'pid-lit' : 'pid-dark'"></div>
+    </div>
+</div>
+<div [class]="disabledVideoClass">
+    <div class="pids-wrapper-disabled">
+        <div [className]="volume > 2 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 10 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 20 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 30 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 40 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 50 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 60 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 70 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 90 ? 'pid-lit' : 'pid-dark'"></div>
+        <div [className]="volume > 98 ? 'pid-lit' : 'pid-dark'"></div>
+    </div>
+</div>
+<div class="video-overlay-data">
+    <div class="icons-data" style="color:#bae67e; ">
+    <span>{{myName}}</span>
+    <fa-icon class="ms-2" [icon]="faCircleCheck" style="font-size: 22px;"></fa-icon>
+    </div>
+</div>
+<video [class]="videoClass" #local_video [autoplay]="true" [muted]="true"  style="object-fit: contain; width: 100%;"></video>
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Settings</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body modal-settings">
+    <span>Video input:</span>
+    <div class="btn-group" dropdown [isDisabled]="videoInputDevices[0]?.label ? false : true">
+        <button id="button-basic" dropdownToggle type="button button-settings" class="btn btn-primary btn-red dropdown-toggle w-100"
+                aria-controls="dropdown-basic" >
+            {{videoInputDevices[0]?.label || "No device found."}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+
+            <li role="menuitem" *ngFor="let device of videoInputDevices"><a class="dropdown-item" (click)="selectVideoInput(device)">{{device.label}}</a></li>
+        </ul>
+    </div>
+    <span class="mt-4">Audio input:</span>
+    <div class="btn-group" dropdown [isDisabled]="audioInputDevices[0]?.label ? false : true">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-primary btn-red dropdown-toggle w-100"
+                aria-controls="dropdown-basic">
+            {{audioInputDevices[0]?.label || "No device found."}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+
+            <li role="menuitem" *ngFor="let device of audioInputDevices"><a class="dropdown-item" (click)="selectAudioInput(device)">{{device.label}}</a></li>
+
+        </ul>
+    </div>
+    <!-- <div class="btn-group" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle w-100"
+                aria-controls="dropdown-basic">
+            {{audioOutputDevices[0]?.label}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu"
+            role="menu" aria-labelledby="button-basic">
+
+            <li role="menuitem" *ngFor="let device of audioOutputDevices"><a class="dropdown-item" (click)="selectAudioOutput(device)">{{device.label}}</a></li>
+        </ul>
+    </div> -->
+  </div>
+</ng-template>
+
+<ngx-spinner name="video-spinner" bdColor="rgba(0,0,0,0.3)" size="medium" color="#fff" type="square-jelly-box" [fullScreen]="false">
+    <p style="color: white; font-size: 150%; margin-top: 20%;"> Connecting... </p>
+</ngx-spinner>
